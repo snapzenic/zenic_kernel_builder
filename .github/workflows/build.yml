@@ -104,10 +104,9 @@ jobs:
 
       - name: "📢 Send Telegram Notification"
         env:
-          TELEGRAM_USER_ID: ${{ secrets.TELEGRAM_USER_ID }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         run: |
           curl -s -G "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-            --data-urlencode "chat_id=${TELEGRAM_USER_ID}" \
+            --data-urlencode "chat_id=@zenicgithubreminder" \
             --data-urlencode "parse_mode=MarkdownV2" \
             --data-urlencode "text=✅ *Kernel build completed successfully\\!*%0A📦 *Device:* \`${{ env.DEVICE }}\`%0A🌿 *Branch:* \`${{ env.ANDROID_KERNEL_BRANCH }}\`%0A📁 *Output:* \`kernel-${{ env.DEVICE }}-${{ env.ANDROID_KERNEL_BRANCH }}-$(date +%Y%m%d).zip\`%0A🕛 *Finished at:* \`$(date '+%Y-%m-%d %H:%M:%S')\`"
